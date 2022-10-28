@@ -1,3 +1,11 @@
+/***
+ * File name: server.js
+ * Author's name: Nguyen Huynh Quang Vinh
+ * StudentID: 301214805
+ * Web App name: Car Shop
+ */
+
+
 let app = require('./server/config/app');
 let debug = require('debug')('comp308-w2019-midterm:server');
 let http = require('http');

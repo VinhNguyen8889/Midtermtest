@@ -6,8 +6,8 @@
     <div class="col-md-offset-1 col-md-10">
       <h3>Favourite Cars List</h3>
       <!-- ------------------------ -->
-      <!-- FIX THE ADD BUTTON BELOW -->
-      <!-- ------------------------ -->
+
+      <!--"Add new car" button  -->
       <a href="/cars/add" class="btn btn-primary" 
         ><i class="fa fa-plus"></i> Add a car</a
       >
@@ -25,7 +25,7 @@
                </tr>
           </thead>
           <tbody>
-            <!-- Template Row - Using for loop to display all data-->
+            <!-- Loop to display all car data-->
             <% for (let count = 0; count < cars.length; count++) { %>
             <tr>
               <td><%= cars[count].Carname %></td>
@@ -33,17 +33,10 @@
               <td class="text-center"><%= cars[count].Carmodel %></td>
               <td class="text-center"><%= cars[count].Price %></td>
 
-                <!-- ------------------------ -->
-                <!-- ADD the EDIT BUTTON HERE -->
-                <!-- ------------------------ -->
+            <!-- EDIT BUTTON and DELETE BUTTON -->
 
-                <td class="text-center col-1">
+              <td class="text-center col-1">
                   <a href="/cars/<%= cars[count]._id %>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square"></i> Edit</a>
-
-                <!-- ------------------------ -->
-                <!--FIX the DELETE BUTTON HERE -->
-                <!-- ------------------------ -->
-          
                   <a href="/cars/delete/<%= cars[count]._id %>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
               </td>
               
@@ -57,7 +50,38 @@
       <div class="col-md-offset-1 col-md-10 text-center">
         <ul class="pagination pagination-lg pager" id="myPager"></ul>
       </div>
-      
+      <!-- MASS DELETE BUTTON -->
+      <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">  <i class="fa fa-trash-o"></i>&nbspDelete</button>
+
+ <!-- Modal for DELETE BUTTON -->
+      <form method="post">
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Car</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Car name:</p>
+                    <input  name="deleteName" placeholder="name" class="form-control" type="text">
+                  </div>
+                  <div class="modal-body">
+                    <p>Min price &#40greater than&#41:</p>
+                    <input  name="minPrice" placeholder="name" class="form-control" type="number" min="0">
+                  </div>
+                  <div class="modal-body">
+                    <p>Max price &#40less than&#41:</p>
+                    <input  name="maxPrice" placeholder="name" class="form-control" type="number" min="0">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

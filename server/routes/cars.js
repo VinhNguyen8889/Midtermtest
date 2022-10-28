@@ -1,3 +1,10 @@
+/***
+ * File name: cars.js
+ * Author's name: Nguyen Huynh Quang Vinh
+ * StudentID: 301214805
+ * Web App name: Car Shop
+ */
+
 // modules required for routing
 let express = require("express");
 let router = express.Router();
@@ -23,9 +30,6 @@ router.get("/", (req, res, next) => {
 
 //  GET the Car Details page in order to add a new Car
 router.get("/add", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
    res.render("cars/add", {
     title: "Cars",
   });
@@ -33,9 +37,6 @@ router.get("/add", (req, res, next) => {
 
 // POST process the Car  Details page and create a new Car  - CREATE
 router.post("/add", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
    let newCar = car({
     Carname: req.body.Carname,
     Category: req.body.Category,
@@ -56,9 +57,6 @@ router.post("/add", (req, res, next) => {
 
 // GET the Car Details page in order to edit an existing Car
 router.get("/:id", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
   let id = req.params.id; //id of actual object
 
   car.findById(id, (err, cartoedit) => {
@@ -77,11 +75,7 @@ router.get("/:id", (req, res, next) => {
 
 // POST - process the information passed from the details form and update the document
 router.post("/:id", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
    let id = req.params.id; //id of actual object
-
    let updateCar = car({
      _id: id,
      Carname: req.body.Carname,
@@ -100,11 +94,8 @@ router.post("/:id", (req, res, next) => {
    });
 });
 
-// GET - process the delete
+// GET - process the delete line by line
 router.get("/delete/:id", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
    let id = req.params.id;
    car.remove({ _id: id }, (err) => {
      if (err) {
@@ -116,5 +107,27 @@ router.get("/delete/:id", (req, res, next) => {
      }
    });
 });
+
+// POST - process the mass delete by name and price
+router.post("/", (req, res, next) => {
+   let name = req.body.deleteName;
+   let min = req.body.minPrice;
+   let max = req.body.maxPrice;
+  
+  if(min==""){min=0}
+  if(max==""){max=999999999}
+  if(name==""){name="$all"}
+  
+   car.deleteMany({ $and: [{Carname:name},{Price: {$gt:min}}, {Price: {$lt:max}} ] },  (err) => {
+     if (err) {
+       console.log(err);
+       res.end(err);
+     } else {
+       //refresh book list
+       res.redirect("/cars");
+     }
+   });
+});
+
 
 module.exports = router;

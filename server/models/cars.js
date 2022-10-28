@@ -1,3 +1,10 @@
+/***
+ * File name: cars.js
+ * Author's name: Nguyen Huynh Quang Vinh
+ * StudentID: 301214805
+ * Web App name: Car Shop
+ */
+
 let mongoose = require("mongoose");
 
 // create a model class
