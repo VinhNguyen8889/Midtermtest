@@ -37,10 +37,10 @@ router.post("/add", (req, res, next) => {
    * ADD CODE HERE *
    *****************/
    let newCar = car({
-    Carname: req.body.name,
-    Category: req.body.category,
-    Carmodel: req.body.model,
-    Price: req.body.price,
+    Carname: req.body.Carname,
+    Category: req.body.Category,
+    Carmodel: req.body.Carmodel,
+    Price: req.body.Price,
   });
   car.create(newCar, (err, car) => {
     if (err) {
@@ -89,7 +89,7 @@ router.post("/:id", (req, res, next) => {
      Carmodel: req.body.Carmodel,
      Price: req.body.Price,
    });
-   car.updateOne({ _id: id }, updatebook, (err) => {
+   car.updateOne({ _id: id }, updateCar, (err) => {
      if (err) {
        console.log(err);
        res.end(err);

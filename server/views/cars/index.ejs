@@ -8,11 +8,12 @@
       <!-- ------------------------ -->
       <!-- FIX THE ADD BUTTON BELOW -->
       <!-- ------------------------ -->
-      <a href="/cars/add" class="btn btn-primary"
+      <a href="/cars/add" class="btn btn-primary" 
         ><i class="fa fa-plus"></i> Add a car</a
       >
       <br />
-      <div class="table-responsive">
+      <br />
+      <div class="table-responsive p-3">
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
@@ -20,34 +21,30 @@
               <th class="text-center">Car Model</th>
               <th class="text-center">Category</th>
               <th class="text-center">Price</th>
-              <th class="text-center"></th>
+              <th class="text-center">Action</th>
                </tr>
           </thead>
           <tbody>
-            <!-- Template Row -->
+            <!-- Template Row - Using for loop to display all data-->
             <% for (let count = 0; count < cars.length; count++) { %>
             <tr>
               <td><%= cars[count].Carname %></td>
-
               <td class="text-center"><%= cars[count].Category %></td>
               <td class="text-center"><%= cars[count].Carmodel %></td>
               <td class="text-center"><%= cars[count].Price %></td>
 
-         
                 <!-- ------------------------ -->
                 <!-- ADD the EDIT BUTTON HERE -->
                 <!-- ------------------------ -->
 
                 <td class="text-center col-1">
-                  <a href="/cars/<%= cars[count]._id %>" class="btn btn-primary btn-sm">
-                  <i class="fas fa-pencil-alt"></i> Edit number: <%= cars[count]._id %></a>
+                  <a href="/cars/<%= cars[count]._id %>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square"></i> Edit</a>
 
-                                      <!-- ------------------------ -->
+                <!-- ------------------------ -->
                 <!--FIX the DELETE BUTTON HERE -->
                 <!-- ------------------------ -->
           
-                  <a href="/cars/<%= cars[count]._id %>" class="btn btn-danger btn-sm">
-                  <i class="fas fa-trash-alt"></i> Delete <%= cars[count]._id %></a>
+                  <a href="/cars/delete/<%= cars[count]._id %>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
               </td>
               
             </tr>
