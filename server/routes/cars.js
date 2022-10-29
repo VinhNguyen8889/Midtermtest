@@ -28,14 +28,14 @@ router.get("/", (req, res, next) => {
   });
 });
 
-//  GET the Car Details page in order to add a new Car
+//  GET the Car Create page in order to add a new Car
 router.get("/add", (req, res, next) => {
    res.render("cars/add", {
     title: "Cars",
   });
 });
 
-// POST process the Car  Details page and create a new Car  - CREATE
+// POST process the Car Create page and create a new Car  - CREATE
 router.post("/add", (req, res, next) => {
    let newCar = car({
     Carname: req.body.Carname,
@@ -116,7 +116,7 @@ router.post("/", (req, res, next) => {
   
   if(min==""){min=0}
   if(max==""){max=999999999}
-  if(name==""){name="$all"}
+  if(name!==""){
   
    car.deleteMany({ $and: [{Carname:name},{Price: {$gt:min}}, {Price: {$lt:max}} ] },  (err) => {
      if (err) {
@@ -126,8 +126,18 @@ router.post("/", (req, res, next) => {
        //refresh book list
        res.redirect("/cars");
      }
-   });
+   });}
+   else {
+    car.deleteMany({ $and: [{Price: {$gt:min}}, {Price: {$lt:max}} ] },  (err) => {
+      if (err) {
+        console.log(err);
+        res.end(err);
+      } else {
+        //refresh book list
+        res.redirect("/cars");
+      }
+    });
+   }
 });
-
 
 module.exports = router;
